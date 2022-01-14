@@ -9,14 +9,12 @@ function getAllDirectors(arrMovies) {
 }
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
-function howManyMovies(arr) {
-  //const evenNumbers = numbers.filter(number => number % 2 === 0);
+ //const evenNumbers = numbers.filter(number => number % 2 === 0);
   // director === "Steven Spielberg"
   // gender === drama - genero drama esta dentro de um array 
   // gender.indexOf() - para acessar o array
-
-
- const newArr = arr.filter((currentMovie) => {
+function howManyMovies(arr) {
+  const newArr = arr.filter((currentMovie) => {
    return  currentMovie.genre.includes("Drama") && currentMovie.director === "Steven Spielberg"
  })
 
@@ -27,14 +25,48 @@ function howManyMovies(arr) {
 
 }
 
+// Solução Ale
+
+/* function howManyMovies(arr) {
+  let result = 0;
+  // Essa const é nossa array filtrada, so com filmes do spilberg
+  const onlySpielberg = arr.filter((currentMovie) => {
+    return currentMovie.director === "Steven Spielberg"
+  })
+  
+  for (let i = 0; i < onlySpielberg.length; i++){
+    //onlySpielberg[0].genre
+    for (let j = 0; j < onlySpielberg[i].genre.length; j++){
+    //onlySpielberg[0].genre[0]
+    //onlySpielberg[0].genre[1]
+    //onlySpielberg[0].genre[2]
+      if (onlySpielberg[i].genre[j] === "Drama"){
+        result++
+      }
+      
+    }
+  }
+   return result
+}
+howManyMovies(movies) */
+
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 
 // Não passou em todos os testes =(  
 
-function scoresAverage(arrScores) {
-  if(arrScores.length === 0){ return 0}
+ // Solução Anna 
+/*  function scoresAverage(average) {  let sumScore = 
+  average.reduce((accumulator, current) => 
+  {    return accumulator + current.score  },0)  
+  
+  return (sumScore / average.length).toFixed(2)} */
+  
 
-  const averageSc = arrScores.reduce((acc, currentMovie) => {
+
+// Minha solução para ajeitar
+
+function scoresAverage(arrScores) {
+   const averageSc = arrScores.reduce((acc, currentMovie) => {
     if(currentMovie.score){
       return acc + currentMovie.score
     }
@@ -44,6 +76,19 @@ function scoresAverage(arrScores) {
 }
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
+
+// Solução Anna 
+// Pensar na solução como tudo resolvido em uma única linha  
+
+/* function dramaMoviesScore(dramaMovie) {
+  let howMany =  dramaMovie
+                           .filter(current => current.genre.indexOf('Drama') !== -1)
+                          .reduce((acc, crr) => acc + crr.score, 0)
+   return (howMany / dramaMovie.length).toFixed(2)
+  }  */
+
+// Minha solução para ajeitar 
+
 function dramaMoviesScore(arrDramas) {
     const dramaMovies = arrDramas.filter((currentMovie) => {
       return  currentMovie.genre.includes("Drama")
@@ -58,29 +103,48 @@ function dramaMoviesScore(arrDramas) {
 }
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear(arrYear) {
-  
-  const moviesYear = arrYear.sort((a, b) => {
-    if(a.year > b.year){ 
+// Resolução refatorada 
+ function orderByYear(arrYear) {
+  const moviesYear = [...arrYear]
+
+   return moviesYear.sort((movie1, movie2) => {
+    if(movie1.year > movie2.year){ 
       return 1
-    } else if(a.year < b.year){ 
+    } else if(movie1.year < movie2.year){ 
       return -1
     } else {
-      return a.title.localeCompare(b.title)
+      return movie1.title.localeCompare(movie2.title)
     }
     })
 
-    return moviesYear
-}
+  
+} 
+
+// Solução Ale correta 
+
+/* function orderByYear(arr) {
+  const newArr = [...arr]
+  
+  return newArr.sort((movie1, movie2) => {
+    if (movie1.year > movie2.year){
+      return 1
+    } else if (movie1.year < movie2.year) {
+      return -1
+    } else {
+      return movie1.title.localeCompare(movie2.title)
+    }
+  })
+} */
+
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically(arrOrder) {
-  const titles = arrOrder.map((currentMovie) => {
-      currentMovie.title
-  })
-  //titles.sort((a, b) =>{a.title.localeCompare(b.title)
-  //})
-  titles.sort((a, b) =>{
+
+//Solução com erro 
+
+//function orderAlphabetically(arrOrder){
+//  const result = arrOrder.map((currentMovie) =>  currentMovie.title)
+//  const result2 = result.sort((a, b) =>a.localeCompare(b))
+ /*  titles.sort((a, b) =>{
     if(a.title > b.title) {
       return -1
     } else if(a.title < b.title) {
@@ -88,14 +152,24 @@ function orderAlphabetically(arrOrder) {
     } else {
       return 0
     }
-  })
-  const twentyTitles = titles.slice(0,20);
+  }) */
+ // return result2.splice(0, 20)
+//}
 
-  return twentyTitles
-}
+// Solução certa 
+ function orderAlphabetically(arr) {
+  const result = arr.map((currentMovie) => currentMovie.title);
+  result.sort((a, b) => a.localeCompare(b))
+  
+  return result.splice(0, 20)
+  
+} 
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes() {}
+function turnHoursToMinutes(arrHours) {
+  // duration of the movies from hours to minutes
+
+}
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg() {}
